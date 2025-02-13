@@ -94,6 +94,12 @@ async def download_stories(client: Client, chat: Chat, dir_path: str):
 				print(f"Downloaded story {index} for user {username or user_id}")
 				index += 1
 		print(f'index: {index}')
+		try:		
+			if index == 1:
+				os.rmdir(stories_dir)
+		except OSError as e:
+			print(f'Can\'t delete directory {stories_dir}, error: {e.strerror}')
+
 
 async def make_dir(chat: Chat) -> str:
 		base_path = '/home/alex/Documents/telegainfo'
@@ -153,7 +159,13 @@ async def download_all_photos(client: Client, chat: Chat, dir: str):
 				await client.download_media(photo.file_id, file_name=file_path)
 				print(f"Downloaded photo {index} for user {username or user_id}")
 				index += 1
+		try:		
+			if index == 1:
+				os.rmdir(photos_dir)
+		except OSError as e:
+			print(f'Can\'t delete directory {photos_dir}, error: {e.strerror}')
 
+		
 async def write_info(dir: str, info: dict, filename: str = 'info.csv'):
 		if dir:
 				filename = os.path.join(dir, filename)
