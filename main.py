@@ -12,6 +12,7 @@ import csv
 config = ConfigParser()
 
 # читаем конфиг где API и прочее
+base_path = '/home/alex/Documents/telegainfo'
 config.read('config.ini')
 API_ID = config.get('pyrogram', 'api_id')
 API_HASH = config.get('pyrogram', 'api_hash')
@@ -102,7 +103,7 @@ async def download_stories(client: Client, chat: Chat, dir_path: str):
 
 
 async def make_dir(chat: Chat) -> str:
-		base_path = '/home/alex/Documents/telegainfo'
+		
 		name = ''
 		try:
 				if chat.last_name and chat.first_name:
